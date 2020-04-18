@@ -5,13 +5,16 @@ import java.util.Scanner;
 
 public class Lotto {
 
-	public static void main(String[] args) {
+	private static String[] getDigitsFromUser() {
 		System.out.println("Введіть три числа від 0 до 9, відділяючи їх пробілами: ");
 		Scanner scanner = new Scanner(System.in);
 		String chosenDigits = scanner.nextLine();
 		scanner.close();
 		String[] digits = chosenDigits.split(" ");
+		return digits;
+	}
 
+	private static int[] defineHappyDigits() {
 		int[] happyDigits = new int[3];
 		Random random = new Random();
 		int counter = 0;
@@ -31,7 +34,10 @@ public class Lotto {
 				counter++;
 			}
 		}
-		
+		return happyDigits;
+	}
+
+	private static void countScores(String[] digits, int[] happyDigits) {
 		int scores = 0;
 		for (String s : digits) {
 			int chosenDigit = Integer.parseInt(s);
@@ -50,5 +56,13 @@ public class Lotto {
 		if (scores > 1) {
 			System.out.print("!!! Вітаємо! Ви вгадали аж " + scores + " рази:)");
 		}
+
+	}
+
+	public static void main(String[] args) {
+		
+		countScores(Lotto.getDigitsFromUser(), defineHappyDigits());
+		
+
 	}
 }
